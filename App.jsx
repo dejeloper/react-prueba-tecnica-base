@@ -9,14 +9,16 @@ export const App = () => {
   const [fact, setFact] = useState()
   const [imageURL, setImageURL] = useState()
 
-  useEffect(() => {
+  const getRandomFact = () => {
     fetch(CAT_ENDPOINT_RANDOM_FACT)
       .then(res => res.json())
       .then(data => {
         const { fact } = data
         setFact(fact)
       })
-  }, [])
+  }
+
+  useEffect(getRandomFact, [])
 
   useEffect(() => {
     if (!fact) return
@@ -35,6 +37,7 @@ export const App = () => {
   return (
     <main>
       <h1>Api de Gatos</h1>
+      <button onClick={getRandomFact}>Obtener nuevo texto</button>
       <section>
         {fact && <p>{fact}</p>}
         {
