@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import './App.css'
 
 const CAT_ENDPOINT_RANDOM_FACT = 'https://catfact.ninja/fact'
 const CAT_ENDPOINT_IMAGE = 'https://cataas.com/cat/says/'
@@ -23,7 +24,6 @@ export const App = () => {
           .then(res => res.json())
           .then(response => {
             const { url } = response
-            console.log({ response })
             setImageURL(url)
           })
       })
@@ -32,17 +32,17 @@ export const App = () => {
   return (
     <main>
       <h1>Api de Gatos</h1>
-      {
-        fact && <p>{fact}</p>
-      }
-      {
-        imageURL &&
-        (
-          <picture>
-            <img src={`${CAT_PREFIX_IMAGE_URL}${imageURL}`} alt={`Imagen extrated using the first three words for ${fact}`} title={`Imagen extrated using the first three words for ${fact}`} />
-          </picture>
-        )
-      }
+      <section>
+        {fact && <p>{fact}</p>}
+        {
+          imageURL &&
+          (
+            <picture>
+              <img src={`${CAT_PREFIX_IMAGE_URL}${imageURL}`} alt={`Imagen extrated using the first three words for ${fact}`} title={`Imagen extrated using the first three words for ${fact}`} />
+            </picture>
+          )
+        }
+      </section>
     </main>
   )
 }
