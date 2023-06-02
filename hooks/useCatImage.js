@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getImage } from './services/facts'
+import { getImage } from '../services/facts'
 
 export const useCatImage = ({ fact, limit = 5 }) => {
   const [imageURL, setImageURL] = useState()
