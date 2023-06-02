@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react'
 
 const CAT_ENDPOINT_RANDOM_FACT = 'https://catfact.ninja/fact'
 const CAT_ENDPOINT_IMAGE = 'https://cataas.com/cat/says/'
-const CAT_PREFIX_IMAGE_URL = 'https://cataas.com/'
+const CAT_PREFIX_IMAGE_URL = 'https://cataas.com'
 
 export const App = () => {
   const [fact, setFact] = useState()
-  const [threeWords, setThreeWords] = useState()
   const [imageURL, setImageURL] = useState()
 
   useEffect(() => {
@@ -16,7 +15,7 @@ export const App = () => {
         const { fact } = data
         setFact(fact)
 
-        setThreeWords(fact.split(' ').slice(0, 3).join(' '))
+        const threeWords = fact.split(' ').slice(0, 3).join(' ')
 
         const endpoint = `${CAT_ENDPOINT_IMAGE}${threeWords}?size=50&color=black&json=true`
 
@@ -24,6 +23,7 @@ export const App = () => {
           .then(res => res.json())
           .then(response => {
             const { url } = response
+            console.log({ response })
             setImageURL(url)
           })
       })
