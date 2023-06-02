@@ -15,19 +15,22 @@ export const App = () => {
       .then(data => {
         const { fact } = data
         setFact(fact)
-
-        const threeWords = fact.split(' ').slice(0, 3).join(' ')
-
-        const endpoint = `${CAT_ENDPOINT_IMAGE}${threeWords}?size=50&color=black&json=true`
-
-        fetch(endpoint)
-          .then(res => res.json())
-          .then(response => {
-            const { url } = response
-            setImageURL(url)
-          })
       })
   }, [])
+
+  useEffect(() => {
+    if (!fact) return
+
+    const threeWords = fact.split(' ').slice(0, 3).join(' ')
+    const endpoint = `${CAT_ENDPOINT_IMAGE}${threeWords}?size=50&color=black&json=true`
+
+    fetch(endpoint)
+      .then(res => res.json())
+      .then(response => {
+        const { url } = response
+        setImageURL(url)
+      })
+  }, [fact])
 
   return (
     <main>
